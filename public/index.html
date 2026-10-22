@@ -526,7 +526,7 @@ async function apiReader(messages){
     body: JSON.stringify({ messages: messages.map(({role, content}) => ({ role, content })) }),
     signal: controller.signal
   });
-  if (!res.ok || !res.body) throw new Error(`Server replied ${res.status}.`);
+  if (!res.ok || !res.body){ let detail = ""; try { detail = (await res.text()).trim().slice(0, 300); } catch {} throw new Error(`Server replied ${res.status}${detail ? ": " + detail : "."}`); }
   return res.body.getReader();
 }
 

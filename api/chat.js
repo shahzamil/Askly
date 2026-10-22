@@ -23,7 +23,8 @@ export default async function handler(req, res) {
       system: "You are Askly, a helpful assistant.",
       messages: messages.slice(-30), // last 30 messages only, to control cost
     });
-    req.on("close", () => stream.abort());
+    // stop only if the user really left (req "close" fires too early in Node)
+    res.on("close", () => { if (!res.writableEnded) stream.abort(); });
     stream.on("text", (t) => res.write(t));
     await stream.finalMessage();
     res.end();
