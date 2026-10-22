@@ -577,7 +577,7 @@ document.addEventListener("keydown", e => {
 (async () => {
   try {
     const r = await fetch(API_URL, { method:"POST", headers:{ "Content-Type":"application/json" }, body:"{}" });
-    demoMode = r.status === 404 || r.status === 405;
+    demoMode = r.status === 404 || r.status === 405 || r.status === 503;
   } catch { demoMode = true; }
   setStatus();
 })();

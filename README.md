@@ -9,27 +9,27 @@ A fast, clean chat app built on the Claude API.
 - Markdown, tables, and code blocks with copy buttons
 - Light, dark, and system themes
 - Works on mobile
+- Demo mode when no API key is set
 
-## Setup
-1. Install Node.js 18 or newer.
-2. Copy `.env.example` to `.env` and add your Anthropic API key.
-3. Run:
-   ```bash
-   npm install
-   npm start
-   ```
-4. Open http://localhost:3000
+## Deploy on Vercel
+1. Import this repo on vercel.com (Framework preset: Other).
+2. Click Deploy. The site works in demo mode right away.
+3. To turn on real answers: Settings → Environment Variables → add `ANTHROPIC_API_KEY`, then redeploy.
+
+## Run on your computer
+```bash
+cp .env.example .env   # add your API key
+npm install
+npm start              # open http://localhost:3000
+```
 
 ## Project structure
 ```
-askly/
-├── public/index.html   # frontend
-├── server.js           # backend (calls Claude API)
-├── package.json
-├── .env.example        # copy to .env, add your key
-└── .gitignore
+public/index.html   frontend
+api/chat.js         backend (Vercel function, calls Claude)
+local-server.js     runs the app locally
 ```
 
 ## Security
-- Never commit your `.env` file. It is listed in `.gitignore`.
-- Before going live, add login and rate limits so others cannot use your API credits.
+- Never commit `.env`. It is in `.gitignore`.
+- Before sharing the link publicly, add login and rate limits so others cannot use your API credits.
